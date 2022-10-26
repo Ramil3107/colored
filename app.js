@@ -14,6 +14,8 @@ document.addEventListener("click", e => {
         const node = e.target.tagName.toLowerCase() == "i" ? e.target : e.target.children[0]
         node.classList.toggle("fa-lock-open")
         node.classList.toggle("fa-lock")
+    } else if( type == "copy") {
+        copyToClickboard(e.target.textContent)
     }
 })
 
@@ -47,6 +49,10 @@ function setRandomColors() {
         setTextColor(text, color)
         setTextColor(icon, color)
     })
+}
+
+function copyToClickboard(text) {
+    return navigator.clipboard.writeText(text)
 }
 
 setRandomColors()
