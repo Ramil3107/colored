@@ -1,5 +1,19 @@
 const cols = document.querySelectorAll(".col")
 
+document.addEventListener("keydown", e => {
+    if (e.code.toLowerCase() == "space") {
+        setRandomColors()
+    }
+})
+
+document.addEventListener("click", e => {
+    const type = e.target.dataset.type
+
+    if (type == "lock") {
+        const node = e.target.tagName.toLowerCase() == "i" ? e.target : e.target.children[0]
+        console.log(node)
+    }
+})
 
 
 function generateRandomColor() {
