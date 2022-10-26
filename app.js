@@ -2,6 +2,7 @@ const cols = document.querySelectorAll(".col")
 
 document.addEventListener("keydown", e => {
     if (e.code.toLowerCase() == "space") {
+        e.preventDefault()
         setRandomColors()
     }
 })
@@ -11,10 +12,10 @@ document.addEventListener("click", e => {
 
     if (type == "lock") {
         const node = e.target.tagName.toLowerCase() == "i" ? e.target : e.target.children[0]
-        console.log(node)
+        node.classList.toggle("fa-lock-open")
+        node.classList.toggle("fa-lock")
     }
 })
-
 
 function generateRandomColor() {
     const hexCodes = "1234567890ABCDF"
@@ -32,13 +33,17 @@ function setTextColor(text, color) {
 
 function setRandomColors() {
     cols.forEach(col => {
+        const isLocked = col.querySelector("i").classList.contains("fa-lock")
         const text = col.querySelector("h2")
         const icon = col.querySelector("button")
         const color = chroma.random()
 
+        if (isLocked) {
+            return
+        }
+
         text.textContent = color.toString().toUpperCase()
         col.style.background = color
-
         setTextColor(text, color)
         setTextColor(icon, color)
     })
